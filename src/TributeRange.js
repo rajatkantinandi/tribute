@@ -274,9 +274,12 @@ class TributeRange {
 
     getLastWordInText(text) {
         var wordsArray;
-        if (this.autocompleteMode) {
+        if (this.tribute.autocompleteMode) {
             if (this.tribute.autocompleteSeparator) {
                 wordsArray = text.split(this.tribute.autocompleteSeparator);
+            }
+            else {
+                wordsArray = [text];
             }
         } else {
             wordsArray = text.split(/\s+/);

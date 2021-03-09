@@ -38,15 +38,15 @@ class TributeSearch {
     }
 
     traverse(string, pattern, stringIndex, patternIndex, patternCache, matchInputInStartsWithMode) {
+        if (this.tribute.autocompleteSeparator) {
+            // if the pattern search at end
+            pattern = pattern.split(this.tribute.autocompleteSeparator).splice(-1)[0];
+        }
+
         if (matchInputInStartsWithMode) {
             return string && pattern && string.startsWith(pattern) && {
                 cache: pattern.split('').map((ch, i) => i), score: pattern.length
             };
-        }
-
-        if (this.tribute.autocompleteSeparator) {
-            // if the pattern search at end
-            pattern = pattern.split(this.tribute.autocompleteSeparator).splice(-1)[0];
         }
 
         if (pattern.length === patternIndex) {

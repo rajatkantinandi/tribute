@@ -847,9 +847,11 @@
       value: function getLastWordInText(text) {
         var wordsArray;
 
-        if (this.autocompleteMode) {
+        if (this.tribute.autocompleteMode) {
           if (this.tribute.autocompleteSeparator) {
             wordsArray = text.split(this.tribute.autocompleteSeparator);
+          } else {
+            wordsArray = [text];
           }
         } else {
           wordsArray = text.split(/\s+/);
@@ -1249,6 +1251,11 @@
     }, {
       key: "traverse",
       value: function traverse(string, pattern, stringIndex, patternIndex, patternCache, matchInputInStartsWithMode) {
+        if (this.tribute.autocompleteSeparator) {
+          // if the pattern search at end
+          pattern = pattern.split(this.tribute.autocompleteSeparator).splice(-1)[0];
+        }
+
         if (matchInputInStartsWithMode) {
           return string && pattern && string.startsWith(pattern) && {
             cache: pattern.split('').map(function (ch, i) {
@@ -1256,11 +1263,6 @@
             }),
             score: pattern.length
           };
-        }
-
-        if (this.tribute.autocompleteSeparator) {
-          // if the pattern search at end
-          pattern = pattern.split(this.tribute.autocompleteSeparator).splice(-1)[0];
         }
 
         if (pattern.length === patternIndex) {

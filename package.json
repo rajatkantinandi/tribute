@@ -1,6 +1,6 @@
 {
   "name": "tributejs-withautocompleteseparator",
-  "version": "5.2.0",
+  "version": "5.2.1",
   "description": "Native ES6 @mentions and autocomplete",
   "main": "dist/tribute.js",
   "module": "dist/tribute.esm.js",
