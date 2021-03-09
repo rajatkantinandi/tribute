@@ -1,5 +1,5 @@
-// Type definitions for TributeJS v5.1.3
-// Project: https://github.com/zurb/tribute
+// Type definitions for TributeJS v5.2.0
+// Original Project: https://github.com/zurb/tribute
 // Definitions by: Jordan Humphreys <https://github.com/mrsweaters/>
 
 export type TributeItem<T extends {}> = {
@@ -10,9 +10,12 @@ export type TributeItem<T extends {}> = {
 };
 
 export type TributeSearchOpts = {
-  pre: string;
-  post: string;
-  skip: boolean;
+  pre?: string;
+  post?: string;
+  skip?: boolean;
+  caseSensitive?: boolean;
+  // specify if the matching algorithm should just check startWith instead of searching anywhere in the input
+  matchInputInStartsWithMode?: boolean;
 };
 
 export type TributeCollection<T extends {}> = {
@@ -72,7 +75,7 @@ export type TributeCollection<T extends {}> = {
   autocompleteMode?: boolean;
 
   // specify a regex to define after which characters the autocomplete option should open
-  autocompleteSeparator?: RegExp;
+  autocompleteSeparator?: RegExp | null;
 
   // Customize the elements used to wrap matched strings within the results list
   searchOpts?: TributeSearchOpts;

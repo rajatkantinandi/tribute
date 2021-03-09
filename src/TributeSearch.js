@@ -17,23 +17,17 @@ class TributeSearch {
 
     match(pattern, string, opts) {
         opts = opts || {}
-        let patternIdx = 0,
-            result = [],
-            len = string.length,
-            totalScore = 0,
-            currScore = 0,
-            pre = opts.pre || '',
+        let pre = opts.pre || '',
             post = opts.post || '',
-            compareString = opts.caseSensitive && string || string.toLowerCase(),
-            ch, compareChar
+            compareString = opts.caseSensitive && string || string.toLowerCase();
 
         if (opts.skip) {
-            return {rendered: string, score: 0}
+            return { rendered: string, score: 0 }
         }
 
         pattern = opts.caseSensitive && pattern || pattern.toLowerCase()
 
-        let patternCache = this.traverse(compareString, pattern, 0, 0, [])
+        let patternCache = this.traverse(compareString, pattern, 0, 0, [], opts.matchInputInStartsWithMode)
         if (!patternCache) {
             return null
         }
@@ -43,7 +37,13 @@ class TributeSearch {
         }
     }
 
-    traverse(string, pattern, stringIndex, patternIndex, patternCache) {
+    traverse(string, pattern, stringIndex, patternIndex, patternCache, matchInputInStartsWithMode) {
+        if (matchInputInStartsWithMode) {
+            return string && pattern && string.startsWith(pattern) && {
+                cache: pattern.split('').map((ch, i) => i), score: pattern.length
+            };
+        }
+
         if (this.tribute.autocompleteSeparator) {
             // if the pattern search at end
             pattern = pattern.split(this.tribute.autocompleteSeparator).splice(-1)[0];

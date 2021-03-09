@@ -29,7 +29,7 @@ class Tribute {
     spaceSelectsMatch = false,
     searchOpts = {},
     menuItemLimit = null,
-    menuShowMinLength = 0
+    menuShowMinLength = 0,
   }) {
     this.autocompleteMode = autocompleteMode;
     this.autocompleteSeparator = autocompleteSeparator;
@@ -308,6 +308,8 @@ class Tribute {
         pre: this.current.collection.searchOpts.pre || "<span>",
         post: this.current.collection.searchOpts.post || "</span>",
         skip: this.current.collection.searchOpts.skip,
+        caseSensitive: this.current.collection.searchOpts.caseSensitive || false,
+        matchInputInStartsWithMode: this.current.collection.searchOpts.matchInputInStartsWithMode || false,
         extract: el => {
           if (typeof this.current.collection.lookup === "string") {
             return el[this.current.collection.lookup];

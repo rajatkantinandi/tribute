@@ -1,6 +1,6 @@
-# Tribute
+# tributejs-withautocompleteseparator
 
-[![CDNJS version](https://img.shields.io/cdnjs/v/tributejs.svg)](https://cdnjs.com/libraries/tributejs) [![Build Status](https://travis-ci.org/zurb/tribute.svg?branch=master)](https://travis-ci.org/zurb/tribute)
+> Note: This is a fork of original TributeJS (https://github.com/zurb/tribute) with some tweaks to make it more usable in autocomplete mode
 
 A cross-browser `@mention` engine written in ES6, no dependencies. Tested in Firefox, Chrome, iOS Safari, Safari, IE 9+, Edge 12+, Android 4+, and Windows Phone.
 
@@ -14,15 +14,10 @@ A cross-browser `@mention` engine written in ES6, no dependencies. Tested in Fir
 - [Example](https://zurb.github.io/tribute/example/)
 
 ## Installing
-
-There are a few ways to install Tribute; [Bower](http://bower.io/), as an [NPM Module](https://npmjs.com/package/tributejs), or by [downloading](https://github.com/zurb/tribute/archive/master.zip) from the `dist` folder in this repo.
-
-### NPM Module
-
 You can install Tribute by running:
 
 ```shell
-npm install tributejs
+npm install tributejs-withautocompleteseparator
 ```
 
 Or by adding Tribute to your `package.json` file.
@@ -30,7 +25,7 @@ Or by adding Tribute to your `package.json` file.
 Import into your ES6 code.
 
 ```js
-import Tribute from "tributejs";
+import Tribute from "tributejs-withautocompleteseparator";
 ```
 
 ### Ruby Gem
@@ -61,27 +56,9 @@ After installing, you need to update your Babel module loader to not exclude Tri
 {
     test: /\.js$/,
     loader: 'babel',
-    exclude: /node_modules\/(?!tributejs)/
+    exclude: /node_modules\/(?!tributejs-withautocompleteseparator)/
 }
 ```
-
-### Download or Clone
-
-Or you can [download the repo](https://github.com/zurb/tribute/archive/master.zip) or clone it localy with this command:
-
-```shell
-git clone git@github.com:zurb/tribute.git
-```
-
-You can then copy the files in the `dist` directory to your project.
-
-```html
-<link rel="stylesheet" href="js/tribute.css" />
-<script src="js/tribute.js"></script>
-```
-
-That's it! Now you are ready to initialize Tribute.
-
 ## Initializing
 
 There are two ways to initialize Tribute, by passing an array of "collections" or by passing one collection object.
@@ -195,12 +172,18 @@ Collection object shown with defaults:
   // turn tribute into an autocomplete
   autocompleteMode: false,
 
+  // specify a regex to define after which characters the autocomplete option should open
+  autocompleteSeparator: /\s+/, // default null means will check the whole string, one can specify a regex
+
   // Customize the elements used to wrap matched strings within the results list
   // defaults to <span></span> if undefined
   searchOpts: {
     pre: '<span>',
     post: '</span>',
-    skip: false // true will skip local search, useful if doing server-side search
+    skip: false, // true will skip local search, useful if doing server-side search,
+    caseSensitive: false,
+    // specify if the matching algorithm should just check startWith instead of searching anywhere in the input
+    matchInputInStartsWithMode: false,
   },
 
   // Limits the number of items in the menu

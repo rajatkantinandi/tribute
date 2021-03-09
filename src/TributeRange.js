@@ -28,7 +28,7 @@ class TributeRange {
 
         if (typeof info !== 'undefined') {
 
-            if(!this.tribute.positionMenu){
+            if (!this.tribute.positionMenu) {
                 this.tribute.menu.style.cssText = `display: block;`
                 return
             }
@@ -60,8 +60,8 @@ class TributeRange {
 
             window.setTimeout(() => {
                 let menuDimensions = {
-                   width: this.tribute.menu.offsetWidth,
-                   height: this.tribute.menu.offsetHeight
+                    width: this.tribute.menu.offsetWidth,
+                    height: this.tribute.menu.offsetHeight
                 }
                 let menuIsOffScreen = this.isMenuOffScreen(coordinates, menuDimensions)
 
@@ -111,7 +111,7 @@ class TributeRange {
 
         try {
             sel.removeAllRanges()
-        } catch (error) {}
+        } catch (error) { }
 
         sel.addRange(range)
         targetElement.focus()
@@ -274,8 +274,10 @@ class TributeRange {
 
     getLastWordInText(text) {
         var wordsArray;
-        if (this.tribute.autocompleteSeparator) {
-            wordsArray = text.split(this.tribute.autocompleteSeparator);
+        if (this.autocompleteMode) {
+            if (this.tribute.autocompleteSeparator) {
+                wordsArray = text.split(this.tribute.autocompleteSeparator);
+            }
         } else {
             wordsArray = text.split(/\s+/);
         }
@@ -372,7 +374,7 @@ class TributeRange {
         }
     }
 
-    lastIndexWithLeadingSpace (str, trigger) {
+    lastIndexWithLeadingSpace(str, trigger) {
         let reversedStr = str.split('').reverse().join('')
         let index = -1
 
@@ -382,10 +384,10 @@ class TributeRange {
 
             let match = true
             for (let triggerIdx = trigger.length - 1; triggerIdx >= 0; triggerIdx--) {
-              if (trigger[triggerIdx] !== reversedStr[cidx-triggerIdx]) {
-                match = false
-                break
-              }
+                if (trigger[triggerIdx] !== reversedStr[cidx - triggerIdx]) {
+                    match = false
+                    break
+                }
             }
 
             if (match && (firstChar || leadingSpace)) {
@@ -435,12 +437,12 @@ class TributeRange {
                                  position: fixed;
                                  display: block;
                                  visibility; hidden;`
-       dimensions.width = this.tribute.menu.offsetWidth
-       dimensions.height = this.tribute.menu.offsetHeight
+        dimensions.width = this.tribute.menu.offsetWidth
+        dimensions.height = this.tribute.menu.offsetHeight
 
-       this.tribute.menu.style.cssText = `display: none;`
+        this.tribute.menu.style.cssText = `display: none;`
 
-       return dimensions
+        return dimensions
     }
 
     getTextAreaOrInputUnderlinePosition(element, position, flipped) {
@@ -503,8 +505,8 @@ class TributeRange {
         let top = 0;
         let left = 0;
         if (this.menuContainerIsBody) {
-          top = rect.top;
-          left = rect.left;
+            top = rect.top;
+            left = rect.left;
         }
 
         let coordinates = {
