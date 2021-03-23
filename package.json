@@ -1,6 +1,6 @@
 {
   "name": "tributejs-withautocompleteseparator",
-  "version": "5.2.1",
+  "version": "5.2.4",
   "description": "Native ES6 @mentions and autocomplete",
   "main": "dist/tribute.js",
   "module": "dist/tribute.esm.js",
@@ -39,10 +39,15 @@
   },
   "scripts": {
     "build": "rollup -c",
+    "prepublish": "npm run build --env='production'",
     "start": "rollup -c -w",
     "test": "karma start test/karma.conf.js",
     "test-single-run": "karma start test/karma.conf.js --single-run --browsers ChromeHeadless"
   },
   "license": "MIT",
-  "dependencies": {}
+  "dependencies": {},
+  "files": [
+    "/dist",
+    "tributejs.d.ts"
+  ]
 }
