@@ -257,10 +257,11 @@
         }
 
         if (instance.tribute.current.mentionText.length < instance.tribute.current.collection.menuShowMinLength) {
+          instance.tribute.hideMenu();
           return;
         }
 
-        if ((instance.tribute.current.trigger || instance.tribute.autocompleteMode) && instance.commandEvent === false || instance.tribute.isActive && event.keyCode === 8) {
+        if ((instance.tribute.current.trigger || instance.tribute.autocompleteMode) && instance.commandEvent === false || instance.tribute.isActive || event.keyCode === 8) {
           instance.tribute.showMenuFor(this, true);
         }
       }
